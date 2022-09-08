@@ -1,0 +1,16 @@
+.logoImg{
+    width: 100px;
+    padding: 0px;
+}
+
+.carritoAvatar{
+    display: flex;
+    align-items: center;
+}
+
+
+.carrito{
+   &_icono{
+        color: grey;
+   }
+}

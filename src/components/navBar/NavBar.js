@@ -11,7 +11,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+
+import Logo from './logo.png';
+import './navBar.scss';
+import Carrito from './cart/cartWidget.jsx';
 
 const pages = ['Buzos', 'Gorras', 'Remeras'];
 const settings = ['Perfil', 'Cuenta', 'Configuración', 'Cerrar sesión'];
@@ -39,23 +42,22 @@ const NavBar = () => {
     <AppBar position="static" style={{ background: '#DC6363' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }}} /> */}
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="/"
             sx={{
-              mr: 2,
+              mr: 0,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
+              letterSpacing: '.2rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            Store
+            <img src={Logo} alt="Logo-Shop" className='logoImg' />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -94,7 +96,6 @@ const NavBar = () => {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -111,7 +112,7 @@ const NavBar = () => {
               textDecoration: 'none',
             }}
           >
-            Store
+            <img src={Logo} alt="Logo-Shop" className='logoImg' />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' },justifyContent: 'center' }}>
             {pages.map((page) => (
@@ -125,10 +126,11 @@ const NavBar = () => {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0 }} className='carritoAvatar'>
+            <Carrito/>
             <Tooltip title="Más opciones">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} >
+                <Avatar alt="Remy Sharp" src="??" />
               </IconButton>
             </Tooltip>
             <Menu

@@ -1,11 +1,12 @@
-import NavBar from'./components/NavBar'
-import './App.css';
+import NavBar from'./components/navBar/NavBar'
+import ItemListContainer from './components/list/itemListContainer'
+import './App.scss';
 
 function App() {
   return (
     <div className="App">
       <NavBar/>
-      <p class='text'>Tienda oficial</p>
+      <ItemListContainer greeting='Tienda de ropa' />
     </div>
   );
 }
