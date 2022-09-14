@@ -19,7 +19,7 @@ export default function CustomizedBadges() {
   return (
     <Box sx={{ m: 2 }}> 
       <IconButton aria-label="cart" className='carrito'>
-        <StyledBadge badgeContent={3} color='secondary'>
+        <StyledBadge badgeContent={0} color='secondary'>
           <ShoppingCartIcon className='carrito_icono'/>
         </StyledBadge>
       </IconButton>
