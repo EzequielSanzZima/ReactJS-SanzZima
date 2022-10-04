@@ -1,10 +1,19 @@
+@import '../src/components/Details/styleDetail.scss';
+@import '../src/components/Cards/cardStyle.scss';
+@import '../src/components/CartView/cartStyle.scss';
+@import url(https://fonts.google.com/share?selection.family=Work%20Sans:ital,wght@0,100;1,100);
+
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box; 
 }
-.h1{
-  display: flex;
-  justify-content: center;
-  padding-top: 5px;
+body{
+  font-family: 'Work Sans', sans-serif;
+}
+
+.text-link{
+  color: inherit;
+  text-decoration: inherit;
 }

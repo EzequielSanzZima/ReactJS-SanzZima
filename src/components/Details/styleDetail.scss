@@ -1,0 +1,29 @@
+.detailImg{
+    max-width: 100%;
+}
+.detailProduct{
+    flex: 1 1 40%;
+}
+.stock-availability{
+    color:#247e0c;
+    font-weight: 400;
+    font-size: .875rem;
+    line-height: 1.43;
+    font-family: 'Work Sans', sans-serif;
+    padding: 25px 0px;
+}
+.priceDetail{
+    color: red;
+    font-family: 'Work Sans', sans-serif;
+    &_US{
+        font-size: 10.8px;
+    }
+}
+
+
+ul{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 25px;
+  }

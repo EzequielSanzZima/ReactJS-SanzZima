@@ -1,0 +1,28 @@
+.cardView{
+    &_buttonViewDetails{
+        background-color: rgb(253, 49, 49) !important
+    }
+}
+.icon{
+    background-color: #f5f6f8 !important;
+    padding: 20px 0px;
+        &_countMinus{
+            &:hover{
+                font-size: 1.5rem;
+            }
+            &:active{
+                color: red;
+            }
+        }
+        &_countPlus{
+            &:hover{
+                font-size: 1.5rem;
+            }
+            &:active{
+                color: green;
+            }
+        }
+        &_buttonAddToCart{
+            background-color: rgb(253, 49, 49) !important;
+        }
+}

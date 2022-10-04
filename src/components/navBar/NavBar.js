@@ -1,23 +1,18 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu,  } from '@mui/material';
+import { Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import { Link }  from 'react-router-dom'
 
 import Logo from './logo.png';
 import './navBar.scss';
-import Carrito from './cart/cartWidget.jsx';
+import Carrito from './cartIcon/cartWidget.jsx';
 
-const pages = ['Buzos', 'Gorras', 'Remeras'];
+const pages = [ {name: 'Remera', to: '/category/remera'},
+                {name: 'Buzos y Camperas', to: '/category/campera-buzo'},
+                {name: 'Gorras', to: '/category/gorra'}];
 const settings = ['Perfil', 'Cuenta', 'Configuración', 'Cerrar sesión'];
+const user = [{userName: 'Remy Sharp', avatarImage: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'}]
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -42,11 +37,10 @@ const NavBar = () => {
     <AppBar position="static" style={{ background: '#DC6363' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          <Link to='/' className='text-link'>
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
             sx={{
               mr: 0,
               display: { xs: 'none', md: 'flex' },
@@ -59,6 +53,7 @@ const NavBar = () => {
           >
             <img src={Logo} alt="Logo-Shop" className='logoImg' />
           </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -90,8 +85,10 @@ const NavBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" align="center">{page}</Typography>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Link to={page.to} className='text-link'>
+                  <Typography textAlign="center" align="center">{page.name}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -116,13 +113,15 @@ const NavBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' },justifyContent: 'center' }}>
             {pages.map((page) => (
+              <Link key={page.name} to={page.to} className='text-link'>
               <Button
-                key={page}
+                
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block',}}
+                sx={{ my: 2, color: 'white', display: 'block',textDecoration: 'none'}}
               >
-                {page}
+                {page.name}
               </Button>
+              </Link>
             ))}
           </Box>
 
@@ -130,7 +129,9 @@ const NavBar = () => {
             <Carrito/>
             <Tooltip title="Más opciones">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} >
-                <Avatar alt="Remy Sharp" src="??" />
+                {user.map((user)=>
+                  <Avatar key={user.userName} alt={user.userName} src={user.avatarImage} />
+                )} 
               </IconButton>
             </Tooltip>
             <Menu
