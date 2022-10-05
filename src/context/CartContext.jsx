@@ -38,13 +38,25 @@ export default function CartContextProvider({ children }) {
         return setCart([])
     }
 
-    const itemTotalPrice = () => {
-        return cart.reduce((cou, item) => cou += item.count * item.price, 0)
+    function itemTotalPrice ()  {
+        return cart.reduce((cou, item) => cou += item.count * item.price.fullPrice, 0)
     }
-
+    
+    function addItemView(item) {
+      if (item.count <= item.stock - 1 && item.stock !== 0 && item.count >= 0) {
+          item.count += 1
+          setCart([...cart])
+      }
+    }
+    function removeItemView(item){
+      if (item.count > 1) {
+        item.count -= 1
+        setCart([...cart])
+    }
+  }
 
   return (
-    <cartCtx.Provider value={{addItem, isInCart, getTotalItemInCart, clearCart, removeItem, itemTotalPrice, cart }}>{children}</cartCtx.Provider>
+    <cartCtx.Provider value={{addItem, isInCart, getTotalItemInCart, clearCart, removeItem, itemTotalPrice, cart, addItemView, removeItemView}}>{children}</cartCtx.Provider>
   )
 }
 

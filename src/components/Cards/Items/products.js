@@ -115,7 +115,7 @@ export const Fetch = (items) => {
     return new Promise((res, rej) => {
         setTimeout(() => {
             res(items)
-        }, 0);
+        }, 2000);
     })
 }
 
@@ -128,6 +128,6 @@ export const SingleItem = (idProduct) => {
             if (itemFind) res(itemFind);
             else rej(new Error('Objeto no encontrado. :('))
             res([2])
-        }, 0);
+        }, 2000);
     })
 }

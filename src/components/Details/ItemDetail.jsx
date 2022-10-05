@@ -37,7 +37,19 @@ function ItemDetail({item}) {
                 <sup className='priceDetail_US'>{item.price.cent}</sup> 
             </Typography>
           </Container>
-          { add ? <Link to='/cart' className='text-link'><Container><Paper sx={{display: 'flex', justifyContent: 'center', pt:1, pb: 1}}><Button variant="contained" size="small" color="primary">Continuar</Button></Paper></Container></Link> : <ItemCount stock={item.stock} initial={1} onAddToCart={onAddToCart} /> }
+          { add ? 
+            <Container>
+              <Paper elevation={2} sx={{display: 'flex',flexDirection: 'column', pt:1, pb: 1, width: '100%'}}>
+              <Link to='/cart' className='text-link'>
+                <Button variant="contained" size="small" color="primary">Carrito</Button>
+              </Link>
+              <Link to='/' className='text-link'>
+                <Button variant="contained" size="small" color="primary">Seguir comprando</Button>
+              </Link>
+              </Paper>
+            </Container>
+          : 
+          <ItemCount stock={item.stock} initial={1} onAddToCart={onAddToCart} /> }
 
           <Container sx={{mt: 5}}>
               <Accordion >
