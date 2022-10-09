@@ -3,33 +3,31 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ItemList } from './Items/ItemList';
-import { products } from './Items/products'
-import { Fetch } from './Items/products';
 import CircularIndeterminate from './Charging'
 import Container from '@mui/material/Container'
 
+import { getItems, getItemsByCategory } from '../../services/firestore'
 
 function ItemListContainer(){
   const [item, allItem] = useState([])
-  const [charging, setCharging] = useState(true)
+  const [isLoading, setLoading] = useState(true)
   const { category } = useParams()
 
-  useEffect(() => {
-    setCharging(true)
-    Fetch(products)
-      .then(data => {
-        if (category) {
-          setCharging(false)
-          allItem(data.filter(products => products.category === category))
-        } else {
-          setCharging(false)
-          allItem(data)
-        }
-      })
-    }, [category])
+  useEffect(()=>{
+    setLoading(true);
+    if (category === undefined){
+      getItems()
+        .then((dataResponse) => allItem(dataResponse))
+        .finally(()=> setLoading(false))
+    }else{
+      getItemsByCategory(category).then((dataResponseFilter) => allItem(dataResponseFilter))
+      .finally(()=> setLoading(false))
+    }
+  },[category])
     
+
 return (<>
-  {!charging ?<Container sx={{display: 'flex', flexWrap: 'wrap'}}><ItemList items={item}/></Container> : <CircularIndeterminate/>}
+  {!isLoading ?<Container sx={{display: 'flex', flexWrap: 'wrap'}}><ItemList items={item}/></Container> : <CircularIndeterminate/>}
   </>);
 }
 export default ItemListContainer;

@@ -34,7 +34,7 @@ function Item ({item}) {
                         <Container sx={{display: 'flex', justifyContent: 'space-evenly',alignItems: 'center', pt: '10px', pb: '10px'}}>
                             <Typography fontFamily='sans-serif' fontSize={20} component="div" sx={{mt: 1,}} className="priceDetail" >
                                 <sup className='priceDetail_US'>US$</sup> 
-                                <span> {item.price.whole}</span>
+                                <span>{item.price.whole}</span>
                                 <sup className='priceDetail_US'>{item.price.cent}</sup> 
                             </Typography>
                             <Link to={`/clothes/${item.id}`} className='text-link'>

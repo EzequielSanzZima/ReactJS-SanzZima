@@ -1,27 +1,40 @@
 import {useState, useEffect} from 'react'
 import { useParams } from "react-router-dom";
-import { SingleItem } from '../Cards/Items/products'
 import ItemDetail from './ItemDetail'
 import CircularIndeterminate from '../Cards/Charging'
 import Container from '@mui/material/Container'
+import { getSingleItem } from '../../services/firestore'
 
 function ItemDetailContainer() {
-    const [item, oneItem] = useState({})
-    const [charging, setCharging] = useState(false)
-    const { id } = useParams()
+    const [item, allItem] = useState({});
+    const [error, setError] = useState(false);
+    const [Loading, IsLoading] = useState(true);
+    const { id } = useParams();
     
-    useEffect(() =>{
-        SingleItem(id).then((data) =>{
-            setCharging(true)
-            oneItem(data)
+    useEffect(() => {
+      getSingleItem(id)
+        .then((dataResponse) => allItem(dataResponse))
+        .catch((errormsg) => {
+          setError(errormsg.message);
         })
-        
-    },[id])
+        .finally(() => IsLoading(false));
+    }, [id]);
 
+
+
+    if (Loading) {
+        return (
+          <>
+            {error ? (
+              <p>Error</p>
+            ) : (
+              <CircularIndeterminate/>
+            )}
+          </>
+        );
+      }
   return <>
-        
-    {!charging && <CircularIndeterminate/>}
-    {charging && <Container sx={{display: 'flex', flexWrap: 'wrap'}}> <ItemDetail item={item}/> </Container>}
+    <Container sx={{display: 'flex', flexWrap: 'wrap'}}> <ItemDetail item={item}/> </Container>
     </>
 }
 

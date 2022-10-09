@@ -3,7 +3,6 @@ const cartCtx = createContext();
 
 export default function CartContextProvider({ children }) {
     const [cart, setCart] = useState([])
-    console.log(cart)
 
     function isInCart(id){
         return cart.some((item) => item.id === id)
