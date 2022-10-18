@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, getDoc, doc, query, where } from "firebase/firestore";
+import { getFirestore, collection, getDocs, getDoc, doc, query, where, addDoc } from "firebase/firestore";
 
 
 // Your web app's Firebase configuration
@@ -17,8 +17,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+//Obtiene todos los objetos para ser vistos en ItemList
 export async function getItems(){
-  const myCollection = collection(db, 'ropa');
+  const myCollection = collection(db, 'products');
   let snapshotDB = await getDocs(myCollection);
 
   let dataDocs = snapshotDB.docs.map((document)=>{
@@ -28,8 +29,9 @@ export async function getItems(){
   return dataDocs
 }
 
+//Obtiene los objetos por categoria
 export async function getItemsByCategory(categoryParams){
-  const myCollection = collection(db, 'ropa');
+  const myCollection = collection(db, 'products');
   const queryCategory = query(myCollection, where('category',"==", categoryParams));
 
   const snapshotDB = await getDocs(queryCategory);
@@ -42,12 +44,18 @@ export async function getItemsByCategory(categoryParams){
 
 }
 
-export async function getSingleItem(idParams){
-  try{
-    const docRef = doc(db, 'ropa', idParams);
-    let docSnapshot = await getDoc(docRef);
-    return { ...docSnapshot.data(), id: docSnapshot.id };
-  }catch(error){
-    console.error(error)
-  } 
+//Obtiene un unico objeto para ser mostrado en ItemDetail
+//Y la id de Compra en CheckoutContainer
+export async function getElementByID(id, type){
+    const colRef = collection(db, type);
+    const result = await getDoc(doc(colRef, id));
+    return result.data();
 }
+
+
+export async function createOrder(orderData){
+  const myCollection = collection(db, 'orders');
+  let response = await addDoc(myCollection, orderData)
+  return (response.id)
+}
+export default db

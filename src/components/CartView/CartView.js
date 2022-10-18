@@ -5,18 +5,15 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Link } from 'react-router-dom';
 import { ItemCount } from '../Cards/Items/ItemCount'
-import Checkout from '../checkout/Checkout';
 
 function Cart() {
   const { cart, getTotalItemInCart, clearCart, removeItem, itemTotalPrice} = useContext(cartCtx)
-  
   const [value] = React.useState(0);
   const tabCarrito = `Carrito (${getTotalItemInCart()})`
-  
+
   function itemSetPrice(item){ 
     return item.price.fullPrice * item.count 
   }
-
 
   if(cart.length > 0){
     return (
@@ -75,9 +72,12 @@ function Cart() {
               </Box>
             </Box>
             <Box sx={{display: 'flex', justifyContent: 'flex-end', width: '95.8%', pb: '15px'}}>
-            <Button variant="contained" color="success" onClick={Checkout}>
-              Finalizar Compra
-            </Button>
+            <Link to='/checkout' className='text-link'>
+              <Button variant="contained" color="success">
+                Finalizar Compra
+              </Button>
+            </Link>
+            
             </Box>
           </Paper>
         </Container>
@@ -99,9 +99,7 @@ function Cart() {
               <p className='emptyCart_text'>Tu carrito está vacío</p>
              <Box sx={{pt: 2}}>
               <Link to='/' className='text-link' >
-                <div >
                   <Button variant="contained" className='emptyCart_button'>Volver al inicio</Button>
-                </div>
               </Link>
              </Box>
             </Box>

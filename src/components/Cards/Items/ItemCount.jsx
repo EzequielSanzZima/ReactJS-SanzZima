@@ -4,7 +4,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { Paper, Typography, Box, Button, Container } from '@mui/material';
 import { cartCtx } from '../../../context/CartContext';
 
-function ItemCount({stock, initial, onAddToCart, cart, item}) {
+function ItemCount({stock, initial, onAddToCart, cart, item, sendOrder}) {
   const [count, setCount] = useState(initial)
   const { addItemView, removeItemView } = useContext(cartCtx)
   function plus(){

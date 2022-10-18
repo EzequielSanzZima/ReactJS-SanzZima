@@ -1,4 +1,4 @@
-import { styled, Box, Badge } from '@mui/material';
+import { styled, Box, Badge, Tooltip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from "react-router-dom";
@@ -19,13 +19,16 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 export default function CustomizedBadges() {
   const { getTotalItemInCart } = useContext(cartCtx)
   return (
+    
     <Link to='/cart'>
       <Box sx={{ m: 2 }}> 
-        <IconButton aria-label="cart" className='carrito'>
-          <StyledBadge badgeContent={getTotalItemInCart()} color='secondary'>
-            <ShoppingCartIcon className='carrito_icono'/>
-          </StyledBadge>
-        </IconButton>
+        <Tooltip title='Ver carrito'>
+          <IconButton aria-label="cart" className='carrito'>
+            <StyledBadge badgeContent={getTotalItemInCart()} color='secondary'>
+                <ShoppingCartIcon className='carrito_icono'/>
+            </StyledBadge>
+          </IconButton>
+        </Tooltip>
       </Box>
     </Link>
   );

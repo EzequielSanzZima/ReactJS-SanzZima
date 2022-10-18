@@ -39,13 +39,17 @@ function ItemDetail({item}) {
           </Container>
           { add ? 
             <Container>
-              <Paper elevation={2} sx={{display: 'flex',flexDirection: 'column', pt:1, pb: 1, width: '100%'}}>
-              <Link to='/cart' className='text-link'>
-                <Button variant="contained" size="small" color="primary">Carrito</Button>
-              </Link>
-              <Link to='/' className='text-link'>
-                <Button variant="contained" size="small" color="primary">Seguir comprando</Button>
-              </Link>
+              <Paper elevation={2} sx={{display: 'flex', alignItems: 'center',justifyContent: 'space-evenly', pt: 1, pb: 1, width: '100%'}}>
+                <Box>
+                  <Link to='/cart' className='text-link'>
+                    <Button variant="contained" size="small" color="primary">Ver Carrito</Button>
+                  </Link>
+                </Box>
+                <Box>
+                  <Link to='/' className='text-link'>
+                    <Button variant="contained" size="small" color="primary">Volver</Button>
+                  </Link>
+                </Box>
               </Paper>
             </Container>
           : 
