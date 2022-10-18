@@ -31,7 +31,7 @@ function Cart() {
             </Box>
             <Divider/>
             {cart.map((item) => 
-            <Box key={item.id}sx={{pt: 2, pb: 2}}>
+            <Box key={item.name}sx={{pt: 2, pb: 2}}>
               <Container sx={{display: 'flex', justifyContent: 'space-around'}} >
                 <Box>
                   <img src={item.img} alt={item.name} width='128px' height='128px'/>

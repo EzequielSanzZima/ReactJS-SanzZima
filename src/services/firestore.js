@@ -56,6 +56,6 @@ export async function getElementByID(id, type){
 export async function createOrder(orderData){
   const myCollection = collection(db, 'orders');
   let response = await addDoc(myCollection, orderData)
-  return (response.id)
+  return response.id
 }
 export default db

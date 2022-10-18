@@ -4,6 +4,8 @@ import { Paper, Container, Box, Button, Typography, TextField, Divider } from '@
 import { Link, useNavigate } from 'react-router-dom'
 import { serverTimestamp } from 'firebase/firestore'
 import { cartCtx } from '../../context/CartContext';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 function CheckoutForm() {
     const [dataForm, setDataForm] = useState({
@@ -14,8 +16,9 @@ function CheckoutForm() {
         document: "",
     });
 
-    const { cart, itemTotalPrice} = useContext(cartCtx)
+    const { cart, itemTotalPrice, clearCart} = useContext(cartCtx)
     const navigate = useNavigate()
+    const MySwal = withReactContent(Swal)
 
     function handleCheckout(e){
         e.preventDefault();
@@ -26,7 +29,13 @@ function CheckoutForm() {
             totalUSD: itemTotalPrice(),
         };
         createOrder(orderData).then(orderID => {
-            navigate(`/checkout/${orderID}`)
+            navigate('/')
+            MySwal.fire({
+                title: <strong>Gracias por tu compra!!</strong>,
+                html: <i>Tu ID de compra es: {orderID}</i>,
+                icon: 'success'
+            })
+            clearCart()
         });
     }
     function inputChangeHandler(event) {

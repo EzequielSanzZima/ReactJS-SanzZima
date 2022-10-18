@@ -3,8 +3,8 @@ import React from 'react'
 function Checkout({item}) {
     
   return (<>
-  {console.log(item)}
-  <p>{item}</p>
+  {console.log()}
+  <p>{item.name}</p>
   </>
   )
 }
