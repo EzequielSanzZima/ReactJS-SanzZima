@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { cartCtx } from '../../context/CartContext';
-import { Paper, Container, Box, Divider, Typography, Tab, Tabs, Button } from '@mui/material';
+import { Paper, Container, Box, Divider, Typography, Tab, Tabs, Button, Tooltip } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Link } from 'react-router-dom';
@@ -26,7 +26,9 @@ function Cart() {
                 <Tab label="Guardados: (0)" disabled /> 
               </Tabs>
               <Box sx={{display: 'flex', alignItems: 'center'}}>
+                <Tooltip title='Eliminar todo el carrito' arrow>
                   <DeleteForeverIcon onClick={clearCart}/>
+                </Tooltip>
                 </Box>
             </Box>
             <Divider/>
@@ -51,7 +53,9 @@ function Cart() {
                       <ItemCount cart="yes" item={item}/>
                       <p>Stock: {item.stock}</p>
                     </Box>
-                    <HighlightOffIcon onClick={() => removeItem(item.id)}/>
+                    <Tooltip title='Eliminar del carrito' arrow>
+                      <HighlightOffIcon onClick={() => removeItem(item.id)}/>
+                    </Tooltip>
                   </Box>
                 </Box>
               </Container>

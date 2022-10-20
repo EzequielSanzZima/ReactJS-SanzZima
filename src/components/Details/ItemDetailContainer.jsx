@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ItemDetail from './ItemDetail'
 import CircularIndeterminate from '../Cards/Charging'
 import Container from '@mui/material/Container'
-import { getSingleItem, getElementByID } from '../../services/firestore'
+import { getElementByID } from '../../services/firestore'
 
 
 function ItemDetailContainer() {

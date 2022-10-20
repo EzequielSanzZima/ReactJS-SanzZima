@@ -6,6 +6,7 @@ import { serverTimestamp } from 'firebase/firestore'
 import { cartCtx } from '../../context/CartContext';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { ValidationGroup, Validate } from 'mui-validate';
 
 function CheckoutForm() {
     const [dataForm, setDataForm] = useState({
@@ -50,6 +51,7 @@ function CheckoutForm() {
 
     if(cart.length > 0){
     return (<>
+    <ValidationGroup>
     <Container sx={{pt: 5}}>
         <Box component='form' onSubmit={handleCheckout} sx={{display: 'flex', justifyContent: 'space-evenly'}}>
         <Paper sx={{pt: 3, width: '70%'}}>
@@ -58,6 +60,8 @@ function CheckoutForm() {
             }}
             noValidate
             autoComplete="off">
+                {/* //validate and for form name */}
+                <Validate name="internal key 1" regex={[/^[a-zA-Z ]{2,30}$/, 'Ingresa bien tu nombre.']}>
                 <TextField
                     value={dataForm.name}
                     onChange={inputChangeHandler}
@@ -67,6 +71,9 @@ function CheckoutForm() {
                     placeholder="Nombre"
                     required
                 />
+                </Validate>
+                {/* //Validate and form for lastName */}
+                <Validate name="internal key 2" regex={[/^[a-zA-Z ]{2,30}$/, 'Ingresa bien tu apellido.']}>
                 <TextField
                     required
                     id="outlined-required"
@@ -75,22 +82,31 @@ function CheckoutForm() {
                     onChange={inputChangeHandler}
                     name="lastName"
                 />
+                </Validate>
+                {/* //Validate and form for phone */}
+                <Validate name="internal key 3" regex={[/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/, 'Ingrese tu numero correctamente.']}>
                 <TextField
                     required
                     id="outlined-required"
-                    label="Numero"
+                    label="Numero de contacto"
                     defaultValue={dataForm.phoneNumber}
                     onChange={inputChangeHandler}
+                    type="number"
                     name="phoneNumber"
                 />
+                </Validate>
+                <Validate name="internal key 4" regex={[/^\d{0,7}$/, 'Ingresa bien tu DNI. (Sin puntos)']}>
                 <TextField
                     required
                     id="outlined-required"
                     label="Documento"
                     defaultValue={dataForm.document}
                     onChange={inputChangeHandler}
+                    type="number"
                     name="document"
                 />
+                </Validate>
+                <Validate name="internal key 5" regex={[/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 'Ingrese tu correo electronico']}>
                 <TextField
                     required
                     id="outlined-required"
@@ -99,6 +115,7 @@ function CheckoutForm() {
                     onChange={inputChangeHandler}
                     name="email"
                 />
+                </Validate>
             </Box>
         </Paper>
         <Paper sx={{width: '25%', height: '70%'}}>
@@ -111,6 +128,7 @@ function CheckoutForm() {
         </Paper>
         </Box>
     </Container>
+    </ValidationGroup>
     </>)
       } 
     return (

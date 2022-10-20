@@ -13,8 +13,8 @@ import { Link } from 'react-router-dom'
 function Item ({item}) {
   return (  
     <Grid key={item.id} sx={{display: 'flex'}} className='cardView'>
-        <Grid item md={3}>
-            <Container fixed sx={{mt: 1}}>
+        <Grid item md={4}>
+            <Box fixed sx={{mt: 1, pr: '15px'}}>
                 <Box>
                     <Card sx={{ maxWidth: 345 }}>
                     <CardActionArea>
@@ -44,7 +44,7 @@ function Item ({item}) {
                         
                     </Card>
                 </Box>
-            </Container> 
+            </Box> 
         </Grid>
     </Grid>
        
