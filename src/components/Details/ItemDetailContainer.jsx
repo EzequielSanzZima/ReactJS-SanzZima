@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ItemDetail from './ItemDetail'
 import CircularIndeterminate from '../Cards/Charging'
 import Container from '@mui/material/Container'
-import { getElementByID } from '../../services/firestore'
+import { getSingleItem } from '../../services/firestore'
 
 
 function ItemDetailContainer() {
@@ -12,7 +12,7 @@ function ItemDetailContainer() {
     const { id } = useParams();
     
     useEffect(()=>{
-      getElementByID(id, 'products').then((data)=>{
+      getSingleItem(id).then((data)=>{
         const filteredData = data
         allItem(filteredData)
         IsLoading(false)

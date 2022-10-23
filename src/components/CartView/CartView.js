@@ -78,7 +78,7 @@ function Cart() {
             <Box sx={{display: 'flex', justifyContent: 'flex-end', width: '95.8%', pb: '15px'}}>
             <Link to='/checkout' className='text-link'>
               <Button variant="contained" color="success">
-                Finalizar Compra
+                Checkout
               </Button>
             </Link>
             

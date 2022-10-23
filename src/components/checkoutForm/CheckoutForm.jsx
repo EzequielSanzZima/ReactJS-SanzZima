@@ -4,18 +4,20 @@ import { Paper, Container, Box, Button, Typography, TextField, Divider } from '@
 import { Link, useNavigate } from 'react-router-dom'
 import { serverTimestamp } from 'firebase/firestore'
 import { cartCtx } from '../../context/CartContext';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { ValidationGroup, Validate } from 'mui-validate';
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 function CheckoutForm() {
+    const [phone, setPhone] = useState(0);
     const [dataForm, setDataForm] = useState({
         name: "", 
         lastName: "" ,
-        phoneNumber: "", 
         email: "", 
         document: "",
     });
+    
 
     const { cart, itemTotalPrice, clearCart} = useContext(cartCtx)
     const navigate = useNavigate()
@@ -25,6 +27,7 @@ function CheckoutForm() {
         e.preventDefault();
         const orderData = {
             buyer: dataForm,
+            phoneBuyer: phone,
             items: cart,
             date: serverTimestamp(),
             totalUSD: itemTotalPrice(),
@@ -33,7 +36,7 @@ function CheckoutForm() {
             navigate('/')
             MySwal.fire({
                 title: <strong>Gracias por tu compra!!</strong>,
-                html: <i>Tu ID de compra es: {orderID}</i>,
+                html: <i>Tu ID de compra es: #{orderID}</i>,
                 icon: 'success'
             })
             clearCart()
@@ -47,14 +50,23 @@ function CheckoutForm() {
         newDataForm[inputName] = value;
         setDataForm(newDataForm);
     } 
+
+    function handleOnChange(value){
+        setPhone(value)
+    }
+
     
 
     if(cart.length > 0){
     return (<>
     <ValidationGroup>
-    <Container sx={{pt: 5}}>
+    <Container sx={{pt: '15vh'}}>
         <Box component='form' onSubmit={handleCheckout} sx={{display: 'flex', justifyContent: 'space-evenly'}}>
-        <Paper sx={{pt: 3, width: '70%'}}>
+        <Paper sx={{width: '70%', pb: '10px'}}>
+            <Typography align='center' sx={{fontWeight: 500, fontSize: '26px', verticalAlign: 'top', pt: '15px', pb: '10px'}}>
+                Ingresa tus datos para terminar la compra.
+            </Typography>
+            <Divider/>
             <Box sx={{
             '& .MuiTextField-root': { m: 1, width: '25ch' }, display: 'flex', flexDirection: 'column', alignItems: 'center'
             }}
@@ -84,18 +96,20 @@ function CheckoutForm() {
                 />
                 </Validate>
                 {/* //Validate and form for phone */}
-                <Validate name="internal key 3" regex={[/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/, 'Ingrese tu numero correctamente.']}>
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Numero de contacto"
-                    defaultValue={dataForm.phoneNumber}
-                    onChange={inputChangeHandler}
-                    type="number"
+                <MuiPhoneNumber        
+                    variant='outlined'
+                    label="Phone Number"
+                    data-cy="user-phone"
+                    defaultCountry={"ar"}
+                    onChange={handleOnChange}
                     name="phoneNumber"
-                />
-                </Validate>
-                <Validate name="internal key 4" regex={[/^\d{0,7}$/, 'Ingresa bien tu DNI. (Sin puntos)']}>
+                    InputProps={{
+                        inputProps: { 
+                            max: 12, min: 5 
+                        }
+                    }}      
+                  />
+                <Validate name="internal key 4" regex={[/^\d{1,8}$/, 'Ingresa bien tu DNI. (Sin puntos)']}>
                 <TextField
                     required
                     id="outlined-required"
@@ -119,11 +133,15 @@ function CheckoutForm() {
             </Box>
         </Paper>
         <Paper sx={{width: '25%', height: '70%'}}>
-            <p>Detalles de tu compra</p>
+            <Typography align='center' sx={{pt: '15px', pb: '10px', fontWeight: 500, fontSize: '26px'}}>
+                Detalles de tu compra
+            </Typography>
             <Divider/>
-            Total: {itemTotalPrice().toFixed(2)} 
-            <Box>
-                <Button type='submit'>Pagar</Button>
+            <Typography align='center' sx={{fontWeight: 500, fontSize: '26px', verticalAlign: 'top', pt: '10px'}}>
+                Total: $ {itemTotalPrice().toFixed(2)} 
+            </Typography>
+            <Box align='center' sx={{pt: '10px', pb: '15px'}}>
+                <Button variant="contained" type='submit'>Finalizar compra</Button>
             </Box>
         </Paper>
         </Box>

@@ -14,7 +14,7 @@ function Item ({item}) {
   return (  
     <Grid key={item.id} sx={{display: 'flex'}} className='cardView'>
         <Grid item md={4}>
-            <Box fixed sx={{mt: 1, pr: '15px'}}>
+            <Box sx={{mt: 1, pr: '15px'}}>
                 <Box>
                     <Card sx={{ maxWidth: 345 }}>
                     <CardActionArea>

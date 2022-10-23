@@ -18,8 +18,8 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 //Obtiene todos los objetos para ser vistos en ItemList
-export async function getItems(){
-  const myCollection = collection(db, 'products');
+export async function getItems(type){
+  const myCollection = collection(db, type);
   let snapshotDB = await getDocs(myCollection);
 
   let dataDocs = snapshotDB.docs.map((document)=>{
@@ -42,6 +42,16 @@ export async function getItemsByCategory(categoryParams){
   })
   return dataDocs
 
+}
+
+export async function getSingleItem(idParams){
+  try{
+    const docRef = doc(db, 'products', idParams);
+    let docSnapshot = await getDoc(docRef);
+    return { ...docSnapshot.data(), id: docSnapshot.id };
+  }catch(error){
+    console.error(error)
+  } 
 }
 
 //Obtiene un unico objeto para ser mostrado en ItemDetail
