@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Tienda de ropa
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Proyecto de e-commerce, trabajo final para Coderhouse.
 
-## Available Scripts
+## Preview
 
-In the project directory, you can run:
+![](https://github.com/EzequielSanzZima/ReactJS-SanzZima/tree/main/src/components/navBar/cartIcon/animation.gif)
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. On GitHub.com, go to the repository's home page. Then, above the list of files, click Code.
+2. Copy the URL address of the repository:
+ - To clone the repository using HTTPS, under "HTTPS" click the copy icon.
+ - To clone the repository using an SSH key, including a certificate issued by the organization's SSH certificate authority, click Use SSH and then click the copy icon.
+ - To clone a repository using GitHub CLI, click GitHub CLI, and then click copy icon.
+3. Open your favorite console
+4. Change the current working directory to the location where you want to clone the directory.
+5. Type git clone and paste the URL you copied earlier:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+ git clone https://github.com/EzequielSanzZima/ReactJS-SanzZima.git
+```
+6. Press Enter to create a local clone.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+git clone https://github.com/EzequielSanzZima/ReactJS-SanzZima.git
+Cloning into 'ReactJS-SanzZima.git'...
+remote: Enumerating objects: 168, done.
+remote: Counting objects: 100% (168/168), done.
+remote: Compressing objects: 100% (104/104), done.
+Receiving objects:  88% (148/168), 721.00 KiB | 1.20 MiB/s
+Receiving objects: 99% (167/168), 321.78 KiB | 1.10 MiB/s, done.
+Resolving deltas: 100% (79/79), done.
+```
+## Start
 
-### `npm run build`
+```
+npm install // Install all the dependencies
+npm start
+```
+## Dependencies used
+- [React and Create-React-App](https://reactjs.org/): Librery.
+- [React-Router-Dom](https://es.reactjs.org/docs/react-dom.html): For navegation.
+- [Mui](https://mui.com/): For components and styles.
+- [SASS](https://sass-lang.com/): For style. 
+- [SweetAlert2](https://sweetalert2.github.io/): Checkout alert.
+- [Mui-Validate](https://www.npmjs.com/package/mui-validate): Validate form 
+- [Material-ui-phone-number](https://www.npmjs.com/package/material-ui-phone-number): Validate phone.
+- [Firebase](https://firebase.google.com/?hl=es): Data base
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Author
+[Ezequiel Sanz Zima](https://www.linkedin.com/in/ezequiel-sanz-zima/)
