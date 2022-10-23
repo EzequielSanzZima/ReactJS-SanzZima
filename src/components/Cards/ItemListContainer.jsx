@@ -16,7 +16,7 @@ function ItemListContainer(){
   useEffect(()=>{
     setLoading(true);
     if (category === undefined){
-      getItems()
+      getItems('products')
         .then((dataResponse) => allItem(dataResponse))
         .finally(()=> setLoading(false))
     }else{

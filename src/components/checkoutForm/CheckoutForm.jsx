@@ -4,17 +4,20 @@ import { Paper, Container, Box, Button, Typography, TextField, Divider } from '@
 import { Link, useNavigate } from 'react-router-dom'
 import { serverTimestamp } from 'firebase/firestore'
 import { cartCtx } from '../../context/CartContext';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { ValidationGroup, Validate } from 'mui-validate';
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 function CheckoutForm() {
+    const [phone, setPhone] = useState(0);
     const [dataForm, setDataForm] = useState({
         name: "", 
         lastName: "" ,
-        phoneNumber: "", 
         email: "", 
         document: "",
     });
+    
 
     const { cart, itemTotalPrice, clearCart} = useContext(cartCtx)
     const navigate = useNavigate()
@@ -24,6 +27,7 @@ function CheckoutForm() {
         e.preventDefault();
         const orderData = {
             buyer: dataForm,
+            phoneBuyer: phone,
             items: cart,
             date: serverTimestamp(),
             totalUSD: itemTotalPrice(),
@@ -32,7 +36,7 @@ function CheckoutForm() {
             navigate('/')
             MySwal.fire({
                 title: <strong>Gracias por tu compra!!</strong>,
-                html: <i>Tu ID de compra es: {orderID}</i>,
+                html: <i>Tu ID de compra es: #{orderID}</i>,
                 icon: 'success'
             })
             clearCart()
@@ -46,18 +50,30 @@ function CheckoutForm() {
         newDataForm[inputName] = value;
         setDataForm(newDataForm);
     } 
+
+    function handleOnChange(value){
+        setPhone(value)
+    }
+
     
 
     if(cart.length > 0){
     return (<>
-    <Container sx={{pt: 5}}>
+    <ValidationGroup>
+    <Container sx={{pt: '15vh'}}>
         <Box component='form' onSubmit={handleCheckout} sx={{display: 'flex', justifyContent: 'space-evenly'}}>
-        <Paper sx={{pt: 3, width: '70%'}}>
+        <Paper sx={{width: '70%', pb: '10px'}}>
+            <Typography align='center' sx={{fontWeight: 500, fontSize: '26px', verticalAlign: 'top', pt: '15px', pb: '10px'}}>
+                Ingresa tus datos para terminar la compra.
+            </Typography>
+            <Divider/>
             <Box sx={{
             '& .MuiTextField-root': { m: 1, width: '25ch' }, display: 'flex', flexDirection: 'column', alignItems: 'center'
             }}
             noValidate
             autoComplete="off">
+                {/* //validate and for form name */}
+                <Validate name="internal key 1" regex={[/^[a-zA-Z ]{2,30}$/, 'Ingresa bien tu nombre.']}>
                 <TextField
                     value={dataForm.name}
                     onChange={inputChangeHandler}
@@ -67,6 +83,9 @@ function CheckoutForm() {
                     placeholder="Nombre"
                     required
                 />
+                </Validate>
+                {/* //Validate and form for lastName */}
+                <Validate name="internal key 2" regex={[/^[a-zA-Z ]{2,30}$/, 'Ingresa bien tu apellido.']}>
                 <TextField
                     required
                     id="outlined-required"
@@ -75,22 +94,33 @@ function CheckoutForm() {
                     onChange={inputChangeHandler}
                     name="lastName"
                 />
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Numero"
-                    defaultValue={dataForm.phoneNumber}
-                    onChange={inputChangeHandler}
+                </Validate>
+                {/* //Validate and form for phone */}
+                <MuiPhoneNumber        
+                    variant='outlined'
+                    label="Phone Number"
+                    data-cy="user-phone"
+                    defaultCountry={"ar"}
+                    onChange={handleOnChange}
                     name="phoneNumber"
-                />
+                    InputProps={{
+                        inputProps: { 
+                            max: 12, min: 5 
+                        }
+                    }}      
+                  />
+                <Validate name="internal key 4" regex={[/^\d{1,8}$/, 'Ingresa bien tu DNI. (Sin puntos)']}>
                 <TextField
                     required
                     id="outlined-required"
                     label="Documento"
                     defaultValue={dataForm.document}
                     onChange={inputChangeHandler}
+                    type="number"
                     name="document"
                 />
+                </Validate>
+                <Validate name="internal key 5" regex={[/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 'Ingrese tu correo electronico']}>
                 <TextField
                     required
                     id="outlined-required"
@@ -99,18 +129,24 @@ function CheckoutForm() {
                     onChange={inputChangeHandler}
                     name="email"
                 />
+                </Validate>
             </Box>
         </Paper>
         <Paper sx={{width: '25%', height: '70%'}}>
-            <p>Detalles de tu compra</p>
+            <Typography align='center' sx={{pt: '15px', pb: '10px', fontWeight: 500, fontSize: '26px'}}>
+                Detalles de tu compra
+            </Typography>
             <Divider/>
-            Total: {itemTotalPrice().toFixed(2)} 
-            <Box>
-                <Button type='submit'>Pagar</Button>
+            <Typography align='center' sx={{fontWeight: 500, fontSize: '26px', verticalAlign: 'top', pt: '10px'}}>
+                Total: $ {itemTotalPrice().toFixed(2)} 
+            </Typography>
+            <Box align='center' sx={{pt: '10px', pb: '15px'}}>
+                <Button variant="contained" type='submit'>Finalizar compra</Button>
             </Box>
         </Paper>
         </Box>
     </Container>
+    </ValidationGroup>
     </>)
       } 
     return (

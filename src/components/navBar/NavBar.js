@@ -11,7 +11,10 @@ import Carrito from './cartIcon/cartWidget.jsx';
 const pages = [ {name: 'Remera', to: '/category/remera'},
                 {name: 'Buzos y Camperas', to: '/category/campera-buzo'},
                 {name: 'Gorras', to: '/category/gorra'}];
-const settings = ['Perfil', 'Cuenta', 'Configuración', 'Cerrar sesión'];
+const settings = [{page: 'Mis compras', to: '/orders'},
+                  {page: 'Cuenta', to: ''},
+                  {page: 'Configuración', to: ''},
+                  {page: 'Cerrar sesión', to: ''}];
 const user = [{userName: 'Remy Sharp', avatarImage: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'}]
 
 const NavBar = () => {
@@ -151,8 +154,10 @@ const NavBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.page} onClick={handleCloseUserMenu}>
+                  <Link to={setting.to} className='text-link'>
+                    <Typography textAlign="center">{setting.page}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>

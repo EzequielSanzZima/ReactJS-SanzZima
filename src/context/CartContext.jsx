@@ -26,7 +26,7 @@ export default function CartContextProvider({ children }) {
           setCart(newCart);
         }
     }
-
+    
     //Muestra en el cartWidget el numero de item que hay.
     function getTotalItemInCart(){
         return cart.reduce((cou, item) => cou += item.count, 0)
