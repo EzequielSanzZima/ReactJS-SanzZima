@@ -1,10 +1,10 @@
-# Tienda de ropa
+# Clothe store
 
 Proyecto de e-commerce, trabajo final para Coderhouse.
 
 ## Preview
 
-![](https://github.com/EzequielSanzZima/ReactJS-SanzZima/tree/main/src/components/navBar/cartIcon/animation.gif)
+![](https://github.com/EzequielSanzZima/ReactJS-SanzZima/blob/test/src/components/navBar/cartIcon/Animation.gif)
 
 ## Installation
 
